@@ -1,5 +1,3 @@
-import sys
-
 left_column = []
 right_column = []
 
