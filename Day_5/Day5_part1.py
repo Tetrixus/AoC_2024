@@ -1,5 +1,6 @@
 rules = {}
 pages = []
+mid = []
 
 with open("puzzle_input.txt") as file:
     for line in file:
@@ -15,21 +16,23 @@ with open("puzzle_input.txt") as file:
             numbers = [int(num.strip()) for num in line.split(",")]
             pages.append(numbers)
 
-mid = []
+
 
 for pg in pages:
+
     position = {page: idx for idx, page in enumerate(pg)}
     valid = True
+    
     for x, ys in rules.items():
         for y in ys:
             if x in position and y in position:
-                if position[x] >= position[y]:
+                if position[x] > position[y]:
                     valid = False
+
                     break
-        if not valid:
-            break
-    if valid:
-        mid_index = len(pg) // 2
-        mid.append(pg[mid_index])
+        if not valid: break
+    
+    if valid: 
+        mid.append(pg[len(pg) // 2])
 
 print(sum(mid))
