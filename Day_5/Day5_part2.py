@@ -32,7 +32,21 @@ for pg in pages:
                     break
         if not valid: break
     
-    if valid: 
-        mid.append(pg[len(pg) // 2])
+    if not valid:
 
+        fixed = pg[:]
+        n = len(fixed)
+
+        switched = True
+
+        while switched:
+            switched = False
+            for i in range(n - 1):
+                a = fixed[i]
+                b = fixed[i + 1]
+                if a in rules.get(b,[]):
+                    fixed[i], fixed[i+1] = fixed[i+1], fixed[i]
+                    switched = True
+
+        mid.append(fixed[len(fixed) // 2])
 print(sum(mid))
